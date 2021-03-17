@@ -5,8 +5,7 @@ import subprocess
 import shlex
 
 default_args = {
- 'start_date': datetime(2021, 1, 1),
- 'catchup': False
+ 'start_date': datetime(2021, 1, 1)
 }
 
 def _sub_process():
@@ -19,7 +18,8 @@ def _sub_process():
 
 with DAG('sub_processing', 
     schedule_interval='@hourly', 
-    default_args=default_args) as dag:
+    default_args=default_args,
+    catchup=False) as dag:
     #Define tasks/operators
 
     sub = PythonOperator(
